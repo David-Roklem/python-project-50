@@ -27,4 +27,7 @@ lint:
 gendiff:
 	poetry run gendiff
 
+reinstall_package:
+	pip install --user --force-reinstall dist/*.whl
+
 .PHONY: install test lint selfcheck check build
