@@ -93,7 +93,7 @@ def get_stylish_format(diff_file):
                     value=stringify_value(current_value, depth + 1),
                 ),
                 )
-        return '\n'.join(chain('{', result_list, [space + '}']))  # noqa: WPS336
+        return '\n'.join(chain('{', result_list, [space + '}']))
 
     converted_file = to_string(diff_file)
     return inner(converted_file, depth=0)

@@ -1,14 +1,29 @@
-from pathlib import Path
-import json
-import yaml
+"""Get format of file."""
+from os.path import splitext
 
 
-def load_file(*args):
-    path = Path(*args)
-    with open(path) as file:
-        if path.suffix == '.json':
-            return json.load(file)
-        elif path.suffix == '.yaml' or '.yml':
-            return yaml.safe_load(file)
-        else:
-            return file.read()
+def get_format(filepath):
+    """Get the file format.
+    Parameters:
+        filepath: path to the file.
+    Returns:
+        extension: string, with specified the file format
+    """
+    _, extension = splitext(filepath)
+    if extension == '.yaml':
+        return 'yaml'
+    elif extension == '.yml':
+        return 'yaml'
+    elif extension == '.json':
+        return 'json'
+
+
+def read_data(filepath):
+    """Read the data from file.
+    Parameters:
+        filepath: path to the file.
+    Returns:
+        data: data from read file.
+    """
+    with open(filepath) as read_file:
+        return read_file.read()
