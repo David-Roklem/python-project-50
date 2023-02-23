@@ -8,30 +8,6 @@ def generate_diff(file_path_1, file_path_2):
     dict1 = load_file(file_path_1)
 
     dict2 = load_file(file_path_2)
-    
-    # with open(file_path_1, encoding="utf-8") as first_file:
-    #     if first_file:
-    #         dict1 = json.load(first_file)
-    #     else:
-    #         return ''
-
-    # with open(file_path_2, encoding="utf-8") as second_file:
-    #     if second_file:
-    #         dict2 = json.load(second_file)
-    #     else:
-    #         return ''
-
-    # file_path_1 = open(parse_arguments().first_file, 'r')
-    # if file_path_1:
-    #     dict1 = json.load(file_path_1)
-    # else:
-    #     return ''
-    
-    # file_path_2 = open(parse_arguments().second_file, 'r')
-    # if file_path_2:
-    #     dict2 = json.load(file_path_2)
-    # else:
-    #     return ''
 
     # loop for finding common keys
     for key in dict1.keys():
