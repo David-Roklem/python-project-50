@@ -12,7 +12,7 @@ CHANGED = 'changed'
 UNCHANGED = 'unchanged'
 
 
-def compare_data(data1:dict, data2:dict) -> dict:
+def compare_data(data1: dict, data2: dict) -> dict:
     diff = {}
     keys1, keys2 = set(data1.keys()), set(data2.keys())
     combained_keys = sorted(keys1 | keys2)
