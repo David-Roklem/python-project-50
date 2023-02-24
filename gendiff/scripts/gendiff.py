@@ -4,8 +4,9 @@ from ..cli import parse_arguments
 
 
 def main():
+    """Run generate_diff."""
     args = parse_arguments()
-    return generate_diff(args.first_file, args.second_file)
+    print(generate_diff(args.first_file, args.second_file, args.format))
 
 
 if __name__ == '__main__':

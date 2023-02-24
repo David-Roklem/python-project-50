@@ -4,11 +4,12 @@ import json
 from typing import Any
 
 
-def get_plain_format(diff_file, initial_path: str =''):
+def get_plain_format(diff_file, initial_path: str = ''):
     """Display a description of the changes as text.
     """
     messages = {
-        'updated': "Property '{path}' was updated. From {old_value} to {new_value}",
+        'updated': "Property '{path}' was updated.\
+            From {old_value} to {new_value}",
         'new': "Property '{path}' was added with value: {value}",
         'removed': "Property '{path}' was removed",
     }
@@ -40,7 +41,7 @@ def get_plain_format(diff_file, initial_path: str =''):
     return '\n'.join(diff_text)
 
 
-def build_path(new_point: str, previous_path: str ='') -> str:
+def build_path(new_point: str, previous_path: str = '') -> str:
     """Build string representation of the path.
     """
     if previous_path:
