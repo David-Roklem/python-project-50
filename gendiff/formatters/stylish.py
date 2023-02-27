@@ -2,6 +2,8 @@
 upon the basis of the main logic implemented in gendiff/diff.py"""
 import json
 from itertools import chain
+from typing import Any
+
 
 STATE = {  # noqa: 407
     'new': '  + ',
@@ -14,7 +16,7 @@ SPACES_COUNT = 4
 INDENT = REPLACER * SPACES_COUNT
 
 
-def stringify_value(checked_value, depth):
+def stringify_value(checked_value: Any, depth):
     """Check value and convert value if it's dict.
     Parameters:
         checked_value: stringify the value.
@@ -40,7 +42,7 @@ def stringify_value(checked_value, depth):
     return '\n'.join(string_list)
 
 
-def get_stylish_format(diff_file):
+def get_stylish_format(diff_file: dict):
     """Generate list of strings with highlighted differences.
     Parameters:
         diff_file: dict with differences.
@@ -49,7 +51,7 @@ def get_stylish_format(diff_file):
         output of the resulting difference in the selected format.
     """
 
-    def inner(diff_dict, depth):  # noqa: WPS430
+    def inner(diff_dict: dict, depth):  # noqa: WPS430
         result_list = []
         space = INDENT * depth
         for key, diff_val in diff_dict.items():
@@ -99,12 +101,8 @@ def get_stylish_format(diff_file):
     return inner(converted_file, depth=0)
 
 
-def to_string(diff_file):
+def to_string(diff_file: dict) -> str:
     """Convert the bool & None values to string.
-    Parameters:
-        diff_file: dict with differences.
-    Returns:
-        diff_file: file after conversion of bool values.
     """
     for key, diff_value in diff_file.items():
         if isinstance(diff_value, (bool, type(None))):

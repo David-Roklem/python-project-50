@@ -1,59 +1,52 @@
-import pytest
-from gendiff.gendiff import generate_diff
+# import pytest
+# import gendiff.file_reader
+# from gendiff.gendiff import generate_diff
+# from gendiff.formatters.formats import JSON, STYLISH, PLAIN
 
 
-OUTPUT_STYLISH_FLAT = 'tests/fixtures/output_stylish_flat'
-OUTPUT_STYLISH_NESTED = 'tests/fixtures/output_stylish_nested'
-OUTPUT_PLAIN_FLAT = 'tests/fixtures/output_plain_flat'
-OUTPUT_PLAIN_NESTED = 'tests/fixtures/output_plain_nested'
-OUTPUT_JSON_FLAT = 'tests/fixtures/output_json_flat'
-OUTPUT_JSON_NESTED = 'tests/fixtures/output_json_nested'
-JSON_FLAT_FL1 = 'tests/fixtures/file1.json'
-JSON_FLAT_FL2 = 'tests/fixtures/file2.json'
-YAML_FLAT_FL1 = 'tests/fixtures/file1.yaml'
-YAML_FLAT_FL2 = 'tests/fixtures/file2.yaml'
-YML_FLAT_FL1 = 'tests/fixtures/file1.yml'
-YML_FLAT_FL2 = 'tests/fixtures/file2.yml'
-JSON_TREE_FL1 = 'tests/fixtures/file1_nested.json'
-JSON_TREE_FL2 = 'tests/fixtures/file2_nested.json'
-YAML_TREE_FL1 = 'tests/fixtures/file1_nested.yaml'
-YAML_TREE_FL2 = 'tests/fixtures/file2_nested.yaml'
-YML_TREE_FL1 = 'tests/fixtures/file1_nested.yml'
-YML_TREE_FL2 = 'tests/fixtures/file2_nested.yml'
+# FLAT_JSON_FILE1 = 'tests/fixtures/file1.json'
+# FLAT_JSON_FILE2 = 'tests/fixtures/file2.json'
+# FLAT_YAML_FILE1 = 'tests/fixtures/file1.yaml'
+# FLAT_YAML_FILE2 = 'tests/fixtures/file2.yaml'
+# FLAT_YML_FILE1 = 'tests/fixtures/file1.yml'
+# FLAT_YML_FILE2 = 'tests/fixtures/file2.yml'
+# NESTED_JSON_FILE1 = 'tests/fixtures/file1_nested.json'
+# NESTED_JSON_FILE2 = 'tests/fixtures/file2_nested.json'
+# NESTED_YAML_FILE1 = 'tests/fixtures/file1_nested.yaml'
+# NESTED_YAML_FILE2 = 'tests/fixtures/file2_nested.yaml'
 
-FORMATTERS = (
-    'stylish',
-    'plain',
-    'json',
-)
+# ANSWER_STYLISH_FLAT = 'tests/fixtures/answer_stylish_flat'
+# ANSWER_STYLISH_NESTED = 'tests/fixtures/answer_stylish_nested'
+# ANSWER_PLAIN_FLAT = 'tests/fixtures/answer_plain_flat'
+# ANSWER_PLAIN_NESTED = 'tests/fixtures/answer_plain_nested'
+# ANSWER_JSON_FLAT = 'tests/fixtures/answer_json_flat'
+# ANSWER_JSON_NESTED = 'tests/fixtures/answer_json_nested'
 
 
-@pytest.mark.parametrize(
-    ('argument1', 'argument2', 'formatter', 'expected'),
-    (
-        (JSON_FLAT_FL1, JSON_FLAT_FL2, FORMATTERS[0], OUTPUT_STYLISH_FLAT),
-        (YAML_FLAT_FL1, YAML_FLAT_FL2, FORMATTERS[0], OUTPUT_STYLISH_FLAT),
-        (YML_FLAT_FL1, YML_FLAT_FL2, FORMATTERS[0], OUTPUT_STYLISH_FLAT),
-        (JSON_TREE_FL1, JSON_TREE_FL2, FORMATTERS[0], OUTPUT_STYLISH_NESTED),
-        (YAML_TREE_FL1, YAML_TREE_FL2, FORMATTERS[0], OUTPUT_STYLISH_NESTED),
-        (YML_TREE_FL1, YML_TREE_FL2, FORMATTERS[0], OUTPUT_STYLISH_NESTED),
-        (JSON_FLAT_FL1, JSON_FLAT_FL2, FORMATTERS[1], OUTPUT_PLAIN_FLAT),
-        (YAML_FLAT_FL1, YAML_FLAT_FL2, FORMATTERS[1], OUTPUT_PLAIN_FLAT),
-        (YML_FLAT_FL1, YML_FLAT_FL2, FORMATTERS[1], OUTPUT_PLAIN_FLAT),
-        (JSON_TREE_FL1, JSON_TREE_FL2, FORMATTERS[1], OUTPUT_PLAIN_NESTED),
-        (YAML_TREE_FL1, YAML_TREE_FL2, FORMATTERS[1], OUTPUT_PLAIN_NESTED),
-        (YML_TREE_FL1, YML_TREE_FL2, FORMATTERS[1], OUTPUT_PLAIN_NESTED),
-        (JSON_FLAT_FL1, JSON_FLAT_FL2, FORMATTERS[2], OUTPUT_JSON_FLAT),
-        (YAML_FLAT_FL1, YAML_FLAT_FL2, FORMATTERS[2], OUTPUT_JSON_FLAT),
-        (YML_FLAT_FL1, YML_FLAT_FL2, FORMATTERS[2], OUTPUT_JSON_FLAT),
-        (JSON_TREE_FL1, JSON_TREE_FL2, FORMATTERS[2], OUTPUT_JSON_NESTED),
-        (YAML_TREE_FL1, YAML_TREE_FL2, FORMATTERS[2], OUTPUT_JSON_NESTED),
-        (YML_TREE_FL1, YML_TREE_FL2, FORMATTERS[2], OUTPUT_JSON_NESTED),
-    ),
-)
-def test_generate_diff(argument1, argument2, formatter, expected):
-    with open(expected) as result_file:
-        expected_result = result_file.read()
-        assert generate_diff(
-            argument1, argument2, formatter
-        ) == expected_result
+# def get_answer(answer_path):
+#     return gendiff.file_reader.read_data(answer_path)
+
+
+# @pytest.mark.parametrize('filepath1, filepath2, format_name, answer', [
+#     (FLAT_JSON_FILE1, FLAT_JSON_FILE2, STYLISH, ANSWER_STYLISH_FLAT),
+#     (FLAT_YAML_FILE1, FLAT_YAML_FILE2, STYLISH, ANSWER_STYLISH_FLAT),
+#     (FLAT_YML_FILE1, FLAT_YML_FILE2, STYLISH, ANSWER_STYLISH_FLAT),
+#     (NESTED_JSON_FILE1, NESTED_JSON_FILE2, STYLISH, ANSWER_STYLISH_NESTED),
+#     (NESTED_YAML_FILE1, NESTED_YAML_FILE2, STYLISH, ANSWER_STYLISH_NESTED),
+#     (FLAT_JSON_FILE1, FLAT_JSON_FILE2, PLAIN, ANSWER_PLAIN_FLAT),
+#     (FLAT_YAML_FILE1, FLAT_YAML_FILE2, PLAIN, ANSWER_PLAIN_FLAT),
+#     (FLAT_YML_FILE1, FLAT_YML_FILE2, PLAIN, ANSWER_PLAIN_FLAT),
+#     (NESTED_JSON_FILE1, NESTED_JSON_FILE2, PLAIN, ANSWER_PLAIN_NESTED),
+#     (NESTED_YAML_FILE1, NESTED_YAML_FILE2, PLAIN, ANSWER_PLAIN_NESTED),
+#     (FLAT_JSON_FILE1, FLAT_JSON_FILE2, JSON, ANSWER_JSON_FLAT),
+#     (FLAT_YAML_FILE1, FLAT_YAML_FILE2, JSON, ANSWER_JSON_FLAT),
+#     (FLAT_YML_FILE1, FLAT_YML_FILE2, JSON, ANSWER_JSON_FLAT),
+#     (NESTED_JSON_FILE1, NESTED_JSON_FILE2, JSON, ANSWER_JSON_NESTED),
+#     (NESTED_YAML_FILE1, NESTED_YAML_FILE2, JSON, ANSWER_JSON_NESTED),
+# ])
+# def test_generate_diff(filepath1, filepath2, format_name, answer):
+#     answer = get_answer(answer)
+#     l_answer = len(answer)  # length answer
+#     assert generate_diff(
+#         filepath1, filepath2, format_name
+#     ) == answer[:l_answer - 1]

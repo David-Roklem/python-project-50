@@ -8,10 +8,12 @@ def get_plain_format(diff_file, initial_path: str = ''):
     """Display a description of the changes as text.
     """
     messages = {
-        'updated': "Property '{path}' was updated.\
-            From {old_value} to {new_value}",
-        'new': "Property '{path}' was added with value: {value}",
-        'removed': "Property '{path}' was removed",
+        'updated':
+            "Property '{path}' was updated. From {old_value} to {new_value}",
+        'new':
+            "Property '{path}' was added with value: {value}",
+        'removed':
+            "Property '{path}' was removed",
     }
     diff_text = []
     for key, diff_value in diff_file.items():

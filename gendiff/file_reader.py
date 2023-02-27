@@ -2,7 +2,7 @@
 from os.path import splitext
 
 
-def get_format(filepath):
+def get_format(filepath: str) -> str:
     """Get the file format.
     Parameters:
         filepath: path to the file.
@@ -18,7 +18,7 @@ def get_format(filepath):
         return 'json'
 
 
-def read_data(filepath):
+def read_data(filepath: str):
     """Read the data from file.
     Parameters:
         filepath: path to the file.

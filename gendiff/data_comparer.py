@@ -7,36 +7,38 @@ input dicts.
 
 
 def compare_data(data1: dict, data2: dict) -> dict:
-    diff = {}
-    keys1, keys2 = set(data1.keys()), set(data2.keys())
-    combained_keys = sorted(keys1 | keys2)
-    for key in combained_keys:
-        if key not in data1 and key in data2:
-            diff[key] = {
-                'type': 'added',
-                'value': data2[key]
-            }
-        elif key in data1 and key not in data2:
-            diff[key] = {
-                'type': 'removed',
-                'value': data1[key]
-            }
-        elif data1[key] == data2[key]:
-            diff[key] = {
-                'type': 'unchanged',
-                'value': data2[key]
-            }
-        elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
-            diff[key] = {
-                'type': 'nested',
-                'value': compare_data(data1[key], data2[key])
-            }
+    """Find the different between two files.
+    """
+    result_diff = {}
+    sorted_keys = sorted(set.union(set(data1), set(data2)))
+    for key in sorted_keys:
+        if key not in data1:
+            status = 'new'
+            ident_value = data2.get(key)
+        elif key not in data2:
+            status = 'removed'
+            ident_value = data1.get(key)
+        elif data1.get(key) == data2.get(key):
+            status = 'equal'
+            ident_value = data2.get(key)
+        elif all(  # noqa: WPS337
+            [
+                isinstance(data1.get(key), dict),
+                isinstance(data2.get(key), dict),
+            ],
+        ):
+            status, ident_value = 'inserted', compare_data(
+                data1.get(key),
+                data2.get(key),
+            )
         else:
-            diff[key] = {
-                'type': 'changed',
-                'value': {
-                    'old value': data1[key],
-                    'new value': data2[key]
-                }
+            status = 'updated'
+            ident_value = {
+                'old': data1.get(key),
+                'new': data2.get(key),
             }
-    return diff
+        result_diff[key] = {
+            'status': '{status}'.format(status=status),
+            'value': ident_value,
+        }
+    return result_diff
