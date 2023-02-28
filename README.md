@@ -10,6 +10,5 @@ asciinema
 ### Finding difference between two json files (stylish)
 [![asciicast](https://asciinema.org/a/553402.svg)](https://asciinema.org/a/553402)
 =======
-[![Maintainability](https://api.codeclimate.com/v1/badges/e04883f29bca091269e1/maintainability)](https://codeclimate.com/github/David-Roklem/python-project-50/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/e04883f29bca091269e1/test_coverage)](https://codeclimate.com/github/David-Roklem/python-project-50/test_coverage)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/81b3b34e95e211a425a3/maintainability)](https://codeclimate.com/github/David-Roklem/python-project-50/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/81b3b34e95e211a425a3/test_coverage)](https://codeclimate.com/github/David-Roklem/python-project-50/test_coverage)
