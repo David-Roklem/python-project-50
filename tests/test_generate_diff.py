@@ -1,5 +1,5 @@
 import pytest
-import gendiff.file_reader
+from gendiff.file_reader import read_data
 from gendiff.gendiff import generate_diff
 from gendiff.formatters.formats import JSON, STYLISH, PLAIN
 
@@ -24,7 +24,7 @@ ANSWER_JSON_NESTED = 'tests/fixtures/answer_json_nested'
 
 
 def get_answer(answer_path):
-    return gendiff.file_reader.read_data(answer_path)
+    return read_data(answer_path)
 
 
 @pytest.mark.parametrize('filepath1, filepath2, format_name, answer', [
