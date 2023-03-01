@@ -21,7 +21,7 @@ def compare_data(data1: dict, data2: dict) -> dict:
         elif data1.get(key) == data2.get(key):
             status = 'equal'
             ident_value = data2.get(key)
-        elif all(  # noqa: WPS337
+        elif all(
             [
                 isinstance(data1.get(key), dict),
                 isinstance(data2.get(key), dict),

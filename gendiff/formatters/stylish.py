@@ -5,7 +5,7 @@ from itertools import chain
 from typing import Any
 
 
-STATE = {  # noqa: 407
+STATE = {
     'new': '  + ',
     'removed': '  - ',
     'equal': '    ',
