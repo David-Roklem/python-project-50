@@ -1,5 +1,5 @@
 """In this module a stylish diff is represented. It is built
-upon the basis of the main logic implemented in gendiff/diff.py"""
+upon the basis of the main logic implemented in gendiff/data_comparer.py"""
 import json
 from itertools import chain
 from typing import Any
@@ -17,7 +17,8 @@ INDENT = REPLACER * SPACES_COUNT
 
 
 def stringify_value(checked_value: Any, depth):
-    """Check value and convert value if it's dict.
+    """
+    Check value and convert value if it's dict.
     Parameters:
         checked_value: stringify the value.
         depth: indent depth.

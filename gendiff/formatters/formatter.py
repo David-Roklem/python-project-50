@@ -5,8 +5,7 @@ from gendiff.formatters.stylish import get_stylish_format
 
 
 def apply_formatter(difference: dict, formatter: str):
-    """Apply the selected display format.
-    """
+    """Apply the selected display format."""
     if formatter == PLAIN:
         return get_plain_format(difference)
     elif formatter == STYLISH:

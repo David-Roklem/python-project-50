@@ -1,12 +1,11 @@
 """In this module a plain diff is represented. It is built
-upon the basis of the main logic implemented in gendiff/diff.py"""
+upon the basis of the main logic implemented in gendiff/data_comparer.py"""
 import json
 from typing import Any
 
 
 def get_plain_format(diff_file, initial_path: str = ''):
-    """Display a description of the changes as text.
-    """
+    """Text representation of the changes."""
     messages = {
         'updated':
             "Property '{path}' was updated. From {old_value} to {new_value}",
@@ -19,6 +18,15 @@ def get_plain_format(diff_file, initial_path: str = ''):
     for key, diff_value in diff_file.items():
         status = diff_value.get('status')
         current_value = diff_value.get('value')
+        # if initial_path:
+        #     path = '.'.join([initial_path, key])
+        # else:
+        #     path = key
+        # Вместо отдельной функции build_path я могу реализовать условную
+        # конструкцию (строчки 21-24), но это вызовет ошибку линтера:
+        # C901 'get_plain_format' is too complex (7). Насколько я понимаю,
+        # допустимый предел цикломатической сложности по flake8 - 6 пунктов
+
         path = build_path(key, initial_path)
         if status == 'inserted':
             diff_text.append(get_plain_format(current_value, path))
@@ -44,18 +52,23 @@ def get_plain_format(diff_file, initial_path: str = ''):
 
 
 def build_path(new_point: str, previous_path: str = '') -> str:
-    """Build string representation of the path.
-    """
+    """Build string representation of the path."""
     if previous_path:
         return '.'.join([previous_path, new_point])
     return new_point
 
 
 def to_string(initial_value: Any):
-    """Convert the value to required form.
-    """
-    if isinstance(initial_value, (bool, type(None))):
-        return json.dumps(initial_value)
+    """Convert the value to required form."""
+    # if isinstance(initial_value, (bool, type(None))):
+    #     return json.dumps(initial_value)
+    # Вместо использования json.dumps:
+    if type(initial_value) is bool:
+        if initial_value is True:
+            return 'true'
+        return 'false'
+    elif initial_value is None:
+        return 'null'
     elif isinstance(initial_value, dict):
         return '[complex value]'
     elif isinstance(initial_value, str):
