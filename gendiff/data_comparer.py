@@ -6,12 +6,11 @@ input dicts.
 """
 
 
-def compare_data(data1: dict, data2: dict) -> dict:
-    """Find the different between two files.
-    """
+def build_diff(data1: dict, data2: dict) -> dict:
+    """Find the different between two files."""
     result_diff = {}
-    sorted_keys = sorted(set.union(set(data1), set(data2)))
-    for key in sorted_keys:
+    all_keys = data1.keys() | data2.keys()
+    for key in all_keys:
         if key not in data1:
             status = 'new'
             ident_value = data2.get(key)
@@ -27,7 +26,7 @@ def compare_data(data1: dict, data2: dict) -> dict:
                 isinstance(data2.get(key), dict),
             ],
         ):
-            status, ident_value = 'inserted', compare_data(
+            status, ident_value = 'inserted', build_diff(
                 data1.get(key),
                 data2.get(key),
             )
