@@ -1,5 +1,5 @@
 """In this module a stylish diff is represented. It is built
-upon the basis of the main logic implemented in gendiff/data_comparer.py"""
+upon the basis of the main logic implemented in gendiff/diff.py"""
 import json
 from itertools import chain
 from typing import Any
@@ -17,8 +17,7 @@ INDENT = REPLACER * SPACES_COUNT
 
 
 def stringify_value(checked_value: Any, depth):
-    """
-    Check value and convert value if it's dict.
+    """Check and convert value if it's dict.
     Parameters:
         checked_value: stringify the value.
         depth: indent depth.
@@ -52,7 +51,7 @@ def get_stylish_format(diff_file: dict):
         output of the resulting difference in the selected format.
     """
 
-    def inner(diff_dict: dict, depth):  # noqa: WPS430
+    def inner(diff_dict: dict, depth):
         result_list = []
         space = INDENT * depth
         for key, diff_val in diff_dict.items():
@@ -103,11 +102,16 @@ def get_stylish_format(diff_file: dict):
 
 
 def to_string(diff_file: dict) -> str:
-    """Convert the bool & None values to string.
-    """
+    """Convert the bool & None values to string."""
     for key, diff_value in diff_file.items():
         if isinstance(diff_value, (bool, type(None))):
             diff_file[key] = json.dumps(diff_value)
+            # if diff_value:
+            #     diff_file[key] = 'true'
+            # elif not diff_value:
+            #     diff_file[key] = 'false'
+            # elif diff_value is None:
+            #     diff_file[key] = 'null'
         elif isinstance(diff_value, dict):
             to_string(diff_value)
     return diff_file

@@ -1,6 +1,5 @@
 """In this module a plain diff is represented. It is built
 upon the basis of the main logic implemented in gendiff/data_comparer.py"""
-import json
 from typing import Any
 
 
@@ -59,7 +58,7 @@ def build_path(new_point: str, previous_path: str = '') -> str:
 
 
 def to_string(initial_value: Any):
-    """Convert the value to required form."""
+    """Convert the value to the required form."""
     # if isinstance(initial_value, (bool, type(None))):
     #     return json.dumps(initial_value)
     # Вместо использования json.dumps:
