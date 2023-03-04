@@ -26,7 +26,7 @@ def stringify_value(checked_value: Any, depth):
     """
     if not isinstance(checked_value, dict):
         return checked_value
-    string_list = ['{']
+    accumulated_string = ['{']
     spaces = INDENT * depth
     for key, current_value in checked_value.items():
         if isinstance(checked_value, dict):
@@ -37,12 +37,12 @@ def stringify_value(checked_value: Any, depth):
             key=key,
             value=current_value,
         )
-        string_list.append(string)
-    string_list.append('{spaces}}}'.format(spaces=spaces))
-    return '\n'.join(string_list)
+        accumulated_string.append(string)
+    accumulated_string.append('{spaces}}}'.format(spaces=spaces))
+    return '\n'.join(accumulated_string)
 
 
-def get_stylish_format(diff_file: dict):
+def diff_tree(diff_file: dict):
     """Generate list of strings with highlighted differences.
     Parameters:
         diff_file: dict with differences.
