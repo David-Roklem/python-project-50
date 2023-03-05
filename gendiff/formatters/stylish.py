@@ -1,6 +1,5 @@
 """In this module a stylish diff is represented. It is built
 upon the basis of the main logic implemented in gendiff/diff.py"""
-import json
 from itertools import chain
 from typing import Any
 
@@ -16,7 +15,7 @@ SPACES_COUNT = 4
 INDENT = REPLACER * SPACES_COUNT
 
 
-def stringify_value(checked_value: Any, depth):
+def stringify_value(checked_value: Any, depth: int) -> str:
     """Check and convert value if it's dict.
     Parameters:
         checked_value: stringify the value.
@@ -25,7 +24,11 @@ def stringify_value(checked_value: Any, depth):
         string_list: string with right indent.
     """
     if not isinstance(checked_value, dict):
-        return checked_value
+        if isinstance(checked_value, bool):
+            return 'true' if checked_value else 'false'
+        elif isinstance(checked_value, type(None)):
+            return 'null'
+        return str(checked_value)
     accumulated_string = ['{']
     spaces = INDENT * depth
     for key, current_value in checked_value.items():
@@ -97,21 +100,4 @@ def diff_tree(diff_file: dict):
                 )
         return '\n'.join(chain('{', result_list, [space + '}']))
 
-    converted_file = to_string(diff_file)
-    return inner(converted_file, depth=0)
-
-
-def to_string(diff_file: dict) -> str:
-    """Convert the bool & None values to string."""
-    for key, diff_value in diff_file.items():
-        if isinstance(diff_value, (bool, type(None))):
-            diff_file[key] = json.dumps(diff_value)
-            # if diff_value:
-            #     diff_file[key] = 'true'
-            # elif not diff_value:
-            #     diff_file[key] = 'false'
-            # elif diff_value is None:
-            #     diff_file[key] = 'null'
-        elif isinstance(diff_value, dict):
-            to_string(diff_value)
-    return diff_file
+    return inner(diff_file, depth=0)
