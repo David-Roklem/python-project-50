@@ -10,9 +10,7 @@ def get_format(filepath: str) -> str:
         extension: string, with specified the file format
     """
     _, extension = splitext(filepath)
-    if extension == '.yaml':
-        return 'yaml'
-    elif extension == '.yml':
+    if extension in ('.yaml', '.yml'):
         return 'yaml'
     elif extension == '.json':
         return 'json'
