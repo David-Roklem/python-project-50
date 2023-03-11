@@ -14,6 +14,10 @@ def get_format(filepath: str) -> str:
         return 'yaml'
     elif extension == '.json':
         return 'json'
+    raise TypeError(
+        'Check the file(s) extension.\nOnly yaml, yml, or json '
+        'file extensions are allowed.'
+    )
 
 
 def read_data(filepath: str):
