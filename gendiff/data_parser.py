@@ -7,7 +7,7 @@ def parse(data, format_: str) -> str:
     if format_ == 'json':
         parsed_data = json.loads(data)
         return parsed_data
-    elif format_ == 'yaml' or format_ == 'yml':
+    elif format_ in ['yaml', 'yml']:
         parsed_data = yaml.safe_load(data)
         return parsed_data
     raise TypeError(

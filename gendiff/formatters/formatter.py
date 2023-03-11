@@ -12,3 +12,4 @@ def apply_formatter(difference: dict, formatter: str) -> str:
         return diff_tree(difference)
     elif formatter == JSON:
         return get_json_format(difference)
+    raise NameError('Incorrect formatter name ({formatter}).')
