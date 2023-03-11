@@ -33,9 +33,10 @@ def get_answer(answer_path):
     ('file1_nested.yaml', 'file2_nested.yaml', JSON, 'answer_json_nested'),
 ])
 def test_generate_diff(filepath1, filepath2, format_name, answer):
-    answer = get_answer(os.path.join('tests', 'fixtures', answer))
+    head = os.path.join('tests', 'fixtures')
+    answer = get_answer(os.path.join(head, answer))
     assert generate_diff(
-        os.path.join('tests', 'fixtures', filepath1),
-        os.path.join('tests', 'fixtures', filepath2),
+        os.path.join(head, filepath1),
+        os.path.join(head, filepath2),
         format_name
     ) == answer
