@@ -5,11 +5,9 @@ import yaml
 def parse(data, format_: str) -> str:
     """Parses data"""
     if format_ == 'json':
-        parsed_data = json.loads(data)
-        return parsed_data
+        return json.loads(data)
     elif format_ in ['yaml', 'yml']:
-        parsed_data = yaml.safe_load(data)
-        return parsed_data
+        return yaml.safe_load(data)
     raise TypeError(
         'The file extension (.{format_}) is not supported.\n'
         'Make sure that the selected files have '

@@ -7,7 +7,7 @@
 ***
 
 ### A package for comparing two json/yaml files
-Files can be mixed (ex., one file is json, another one is yaml)
+Files can be mixed (ex., one file is json, another one is yaml).
 There are three provided outputs:
 - **stylish** (set by default)
 - **plain**
