@@ -2,7 +2,7 @@ import os
 import pytest
 from gendiff.file_reader import read_data
 from gendiff.gendiff import generate_diff
-from gendiff.formatters.formats import JSON, STYLISH, PLAIN
+from gendiff.formatters import JSON, STYLISH, PLAIN
 
 
 def get_answer(answer_path):

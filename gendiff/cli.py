@@ -1,5 +1,5 @@
 import argparse
-from .formatters.formats import JSON, STYLISH, PLAIN
+from .formatters import JSON, STYLISH, PLAIN
 
 
 def parse_arguments():
