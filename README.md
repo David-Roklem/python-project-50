@@ -46,21 +46,25 @@ There are test files you can use for experimenting with output.
 For instance, use the following command:
 ```gendiff tests/fixtures/file1.yaml tests/fixtures/file2.json```
 The output will be:
-```{
+```
+{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
   - timeout: 50
   + timeout: 20
   + verbose: true
-}```
+}
+```
 If you slightly alter the command adding plain option:
 ```gendiff -f plain tests/fixtures/file1.yaml tests/fixtures/file2.json```
 You will get:
-```Property 'follow' was removed
+```
+Property 'follow' was removed
 Property 'proxy' was removed
 Property 'timeout' was updated. From 50 to 20
-Property 'verbose' was added with value: true```
+Property 'verbose' was added with value: true
+```
 ***
 
 ### asciinema
