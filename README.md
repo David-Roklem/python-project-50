@@ -4,7 +4,7 @@
 [![Actions Status](https://github.com/David-Roklem/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/David-Roklem/python-project-50/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/81b3b34e95e211a425a3/maintainability)](https://codeclimate.com/github/David-Roklem/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/81b3b34e95e211a425a3/test_coverage)](https://codeclimate.com/github/David-Roklem/python-project-50/test_coverage)
-=======
+***
 
 ### A package for comparing two json/yaml files
 Files can be mixed (ex., one file is json, another one is yaml)
@@ -20,6 +20,48 @@ git clone https://github.com/David-Roklem/python-project-50.git
 cd python-project-50
 make install
 ```
+***
+
+### Help command
+```
+gendiff -h
+
+usage: gendiff [-h] [-f FORMAT] first_file second_file
+
+Compares two configuration files and shows a difference.
+
+positional arguments:
+  first_file
+  second_file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f {json,stylish,plain}, --format {json,stylish,plain}
+                        output format (default: stylish)
+```
+***
+
+### Output
+There are test files you can use for experimenting with output. 
+For instance, use the following command:
+```gendiff tests/fixtures/file1.yaml tests/fixtures/file2.json```
+The output will be:
+```{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}```
+If you slightly alter the command adding plain option:
+```gendiff -f plain tests/fixtures/file1.yaml tests/fixtures/file2.json```
+You will get:
+```Property 'follow' was removed
+Property 'proxy' was removed
+Property 'timeout' was updated. From 50 to 20
+Property 'verbose' was added with value: true```
+***
 
 ### asciinema
 
