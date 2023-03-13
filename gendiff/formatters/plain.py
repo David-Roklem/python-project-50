@@ -62,11 +62,9 @@ def to_string(initial_value: Any):
     # if isinstance(initial_value, (bool, type(None))):
     #     return json.dumps(initial_value)
     # Вместо использования json.dumps:
-    if type(initial_value) is bool:
-        if initial_value is True:
-            return 'true'
-        return 'false'
-    elif initial_value is None:
+    if isinstance(initial_value, bool):
+        return str(initial_value).lower()
+    elif isinstance(initial_value, type(None)):
         return 'null'
     elif isinstance(initial_value, dict):
         return '[complex value]'
