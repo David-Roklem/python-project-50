@@ -15,7 +15,7 @@ SPACES_COUNT = 4
 INDENT = REPLACER * SPACES_COUNT
 
 
-def stringify_value(checked_value: Any, depth: int) -> str:
+def stringify_value(value: Any, depth: int) -> str:
     """Check and convert value if it's dict.
     Parameters:
         checked_value: stringify the value.
@@ -23,26 +23,26 @@ def stringify_value(checked_value: Any, depth: int) -> str:
     Returns:
         string_list: string with right indent.
     """
-    if not isinstance(checked_value, dict):
-        if isinstance(checked_value, bool):
-            return 'true' if checked_value else 'false'
-        elif isinstance(checked_value, type(None)):
-            return 'null'
-        return str(checked_value)
-    accumulated_string = ['{']
-    spaces = INDENT * depth
-    for key, current_value in checked_value.items():
-        if isinstance(checked_value, dict):
-            current_value = stringify_value(current_value, depth + 1)
-        string = '{spaces}{indent}{key}: {value}'.format(
-            spaces=spaces,
-            indent=INDENT,
-            key=key,
-            value=current_value,
-        )
-        accumulated_string.append(string)
-    accumulated_string.append('{spaces}}}'.format(spaces=spaces))
-    return '\n'.join(accumulated_string)
+    if isinstance(value, dict):
+        lines = ['{']
+        spaces = INDENT * depth
+        for key, current_value in value.items():
+            if isinstance(value, dict):
+                current_value = stringify_value(current_value, depth + 1)
+            line = '{spaces}{indent}{key}: {value}'.format(
+                spaces=spaces,
+                indent=INDENT,
+                key=key,
+                value=current_value,
+            )
+            lines.append(line)
+        lines.append('{spaces}}}'.format(spaces=spaces))
+        return '\n'.join(lines)
+    elif isinstance(value, bool):
+        return str(value).lower()
+    elif isinstance(value, type(None)):
+        return 'null'
+    return str(value)
 
 
 def diff_tree(diff_file: dict):
@@ -55,13 +55,13 @@ def diff_tree(diff_file: dict):
     """
 
     def inner(diff_dict: dict, depth):
-        result_list = []
+        lines = []
         space = INDENT * depth
         for key, diff_val in diff_dict.items():
             status = diff_val.get('status')
             current_value = diff_val.get('value')
             if status == 'inserted':
-                result_list.append(
+                lines.append(
                     '{space}{indent}{key}: {inserted_value}'.format(
                         space=space,
                         indent=INDENT,
@@ -70,7 +70,7 @@ def diff_tree(diff_file: dict):
                     ),
                 )
             elif status == 'updated':
-                result_list.append('{space}{flag}{key}: {old_value}'.format(
+                lines.append('{space}{flag}{key}: {old_value}'.format(
                     space=space,
                     flag=STATE.get('removed'),
                     key=key,
@@ -80,7 +80,7 @@ def diff_tree(diff_file: dict):
                     ),
                 ),
                 )
-                result_list.append('{space}{flag}{key}: {new_value}'.format(
+                lines.append('{space}{flag}{key}: {new_value}'.format(
                     space=space,
                     flag=STATE.get('new'),
                     key=key,
@@ -91,13 +91,13 @@ def diff_tree(diff_file: dict):
                 ),
                 )
             else:
-                result_list.append('{space}{flag}{key}: {value}'.format(
+                lines.append('{space}{flag}{key}: {value}'.format(
                     space=space,
                     flag=STATE.get(status),
                     key=key,
                     value=stringify_value(current_value, depth + 1),
                 ),
                 )
-        return '\n'.join(chain('{', result_list, [space + '}']))
+        return '\n'.join(chain('{', lines, [space + '}']))
 
     return inner(diff_file, depth=0)
