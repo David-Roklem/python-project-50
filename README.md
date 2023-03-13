@@ -12,6 +12,7 @@ There are three provided outputs:
 - **stylish** (set by default)
 - **plain**
 - **json**
+
 =======
 
 ### Installation guide
