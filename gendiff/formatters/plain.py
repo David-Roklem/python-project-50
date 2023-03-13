@@ -69,5 +69,5 @@ def to_string(initial_value: Any):
     elif isinstance(initial_value, dict):
         return '[complex value]'
     elif isinstance(initial_value, str):
-        return "'{value}'".format(value=initial_value)
+        return f"'{initial_value}'"
     return initial_value
