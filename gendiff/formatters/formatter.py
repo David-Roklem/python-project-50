@@ -8,8 +8,8 @@ def apply_formatter(difference: dict, formatter: str) -> str:
     """Apply the selected display format."""
     if formatter == PLAIN:
         return get_plain_format(difference)
-    elif formatter == STYLISH:
+    if formatter == STYLISH:
         return diff_tree(difference)
-    elif formatter == JSON:
+    if formatter == JSON:
         return get_json_format(difference)
-    raise NameError('Incorrect formatter name ({formatter}).')
+    raise ValueError('Incorrect formatter name ({formatter}).')
