@@ -8,7 +8,7 @@ def parse(data, format_: str) -> str:
         return json.loads(data)
     if format_ == 'yaml':
         return yaml.safe_load(data)
-    raise TypeError(
+    raise ValueError(
         'The file extension (.{format_}) is not supported.\n'
         'Make sure that the selected files have '
         'the extension: json, yaml or yml.'.format(format_=format_)
